@@ -1,21 +1,25 @@
-/* eslint-disable no-var */
-import path from 'path';
+var webpack = require('webpack');
+var path = require('path');
+
+var BUILD_DIR = path.resolve(__dirname, 'src/static');
+var APP_DIR = path.resolve(__dirname, 'src/js');
 
 module.exports = {
-  entry: path.join(__dirname, 'src/js/index.js'),
-  output: {
-      filename: 'bundle.js',
-      path: path.join(__dirname, 'dist'),
-      publicPath: '/static/'
-  },
-  devtool: 'eval-source-map',
-  module: {
-    loaders: [
-      {
-        test: /\.js?$/,
-        exclude: /node_modules/,
-        loader: 'babel',
-      }
-    ]
-  }
+    devtool: 'eval-source-map',
+    entry: APP_DIR + '/index.js',
+    output: {
+        filename: 'bundle.js',
+        path: BUILD_DIR,
+        publicPath: '/static/'
+    },
+    module : {
+        loaders : [
+          {
+            test : /\.js?/,
+            include : APP_DIR,
+            exclude: /node_modules/,
+            loader : 'babel'
+          }
+        ]
+    }
 };
