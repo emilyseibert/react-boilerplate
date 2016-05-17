@@ -1,10 +1,20 @@
+require('../scss/style.scss');
+// require('./config/a11y.ts');
+
 import React from 'react';
-import {render} from 'react-dom';
+import ReactDOM from 'react-dom';
+import { Router, browserHistory } from 'react-router';
+import routes from './routes';
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
+import appStore from './reducers'
 
-class App extends React.Component {
-  render () {
-    return <p> Hello React Test!</p>;
-  }
-}
+const store = createStore(appStore);
 
-render(<App/>, document.getElementById('root'));
+const Root = <Provider store={store}>
+    <Router history={browserHistory} onUpdate={() => window.scrollTo(0, 0)}>
+        {routes}
+    </Router>
+</Provider>;
+
+ReactDOM.render(Root, document.getElementById('root'));
