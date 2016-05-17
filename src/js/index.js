@@ -1,5 +1,5 @@
 require('../scss/style.scss');
-// require('./config/a11y.ts');
+require('./config/a11y.js');
 
 import React from 'react';
 import ReactDOM from 'react-dom';
